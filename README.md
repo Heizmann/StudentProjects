@@ -66,7 +66,7 @@ The PolyPacSimplification is an inexpensive simplification of logical formulas. 
 
 
 
-## Finished StudentProjects (not available any more but there we might find related follow-up topics)
+## Finished StudentProjects (not available any more, but we might find related follow-up topics)
 
 ### Topic T06: Ultimate TreeAutomizer
 * This is a great topic if you love tree automata
