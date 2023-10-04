@@ -22,6 +22,7 @@
 * T12: PolyPac Simplification mit Alex' Congruence Closure Array-Support geben
 * ~~T13: Optimierungen für SimplifyDDA~~
 * T14: Re-implementation of the control flow graph construction
+* T15: Egraphs for simplification an quantifier elimination
 
 
 ### Topic T02: Constraint-based Invariant Synthesis ★★★★★
@@ -56,6 +57,11 @@ The PolyPacSimplification is an inexpensive simplification of logical formulas. 
 * Motivation: Currently, our construction of a control-flow graph for Boogie programs consists of two steps: First we transform structured Boogie into unstructured Boogie (lots of gotos istead of if-then-else and while), secondly we construct a control-flow graph for the unstructured Boogie code. Working with the resulting control-flow graph is sometimes difficult because we cannot see the connection of the orignal Boogie code and the control flow graph easily.
 * In this project we implement a simple construction of the control-flow graph. This construction was presented in Section 11 of the [lecture on program verification](https://swt.informatik.uni-freiburg.de/teaching/SS2022/program-verification).
 * Extensions: Implement Large Block Encoding, Formal pesentation of our (interprocedural) control-flow graph.
+
+### Topic T15: Egraphs for simplification and quantifier elimination
+* Motivation: In practise (our program verification) we sometimes have formulas where quantified subformulas can be removed by our formula simplification (see T13 for simplification). Our new simplification avoids the costly simplification of quantified subformulas and hence cannot remove these subformulas. We implemented a new quantifier elimination technique (DualJunctionSgi) which addresses these formulas but that works only in a few cases.
+* A [recent publication](https://link.springer.com/chapter/10.1007/978-3-031-37703-7_4) with promising ideas might improve our formula simplification.
+* Can we compute an egraph for each node (resp the critical contraint of each node), replace subterms by their representative in order to get simpler formulas and in oder to successfully apply DualJunctionSgi more often?
 
 
 
