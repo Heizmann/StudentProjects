@@ -21,6 +21,7 @@
 * T11: Counterexample Validation auf Boogie Ebene
 * T12: PolyPac Simplification mit Alex' Congruence Closure Array-Support geben
 * ~~T13: Optimierungen für SimplifyDDA~~
+* T14: Re-implementation of the control flow graph construction
 
 
 ### Topic T02: Constraint-based Invariant Synthesis ★★★★★
@@ -50,6 +51,11 @@ Motivation: Ultimate Automizer reports counterexample. Internally, the counterex
 
 ### Topic T12: Congruence Closure for PolyPacSimplification
 The PolyPacSimplification is an inexpensive simplification of logical formulas. (For simplification of logical formulas see T13.) Currently, the PolyPacSimplification utilizes polynomial relations (e.g. formulas of the form `x+y>=0` or `v=w`) for the simplification. In this project, we want to utilize also information about equalities or not equals relations for the simplification. E.g., the context for the simplification is (also) a data structure that learns from `f(x)≠f(y)` that `x` and `y` are different.
+
+### Topic T14: Construction of a control flow graph for Boogie programs
+* Motivation: Currently, our construction of a control-flow graph for Boogie programs consists of two steps: First we transform structured Boogie into unstructured Boogie (lots of gotos istead of if-then-else and while), secondly we construct a control-flow graph for the unstructured Boogie code. Working with the resulting control-flow graph is sometimes difficult because we cannot see the connection of the orignal Boogie code and the control flow graph easily.
+* In this project we implement a simple construction of the control-flow graph. This construction was presented in Section 11 of the [lecture on program verification](https://swt.informatik.uni-freiburg.de/teaching/SS2022/program-verification).
+* Extensions: Implement Large Block Encoding, Formal pesentation of our (interprocedural) control-flow graph.
 
 
 
