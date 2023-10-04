@@ -22,7 +22,7 @@
 * T12: PolyPac Simplification mit Alex' Congruence Closure Array-Support geben
 * ~~T13: Optimierungen für SimplifyDDA~~
 * T14: Re-implementation of the control flow graph construction
-* T15: Egraphs for simplification an quantifier elimination
+* T15: Egraphs for simplification and quantifier elimination
 
 
 ### Topic T02: Constraint-based Invariant Synthesis ★★★★★
