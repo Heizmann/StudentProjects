@@ -23,6 +23,7 @@
 * ~~T13: Optimierungen für SimplifyDDA~~
 * T14: Re-implementation of the control flow graph construction
 * T15: Egraphs for simplification and quantifier elimination
+* T16: Simplification of Floyd-Hoare annotations
 
 
 ### Topic T02: Constraint-based Invariant Synthesis ★★★★★
@@ -62,6 +63,9 @@ The PolyPacSimplification is an inexpensive simplification of logical formulas. 
 * Motivation: In practise (our program verification) we sometimes have formulas where quantified subformulas can be removed by our formula simplification (see T13 for simplification). Our new simplification avoids the costly simplification of quantified subformulas and hence cannot remove these subformulas. We implemented a new quantifier elimination technique (DualJunctionSgi) which addresses these formulas but that works only in a few cases.
 * A [recent publication](https://link.springer.com/chapter/10.1007/978-3-031-37703-7_4) with promising ideas might improve our formula simplification.
 * Can we compute an egraph for each node (resp the critical contraint of each node), replace subterms by their representative in order to get simpler formulas and in oder to successfully apply DualJunctionSgi more often?
+
+### Topic 16: Simplification of Floyd-Hoare annotations
+* Motivation: Proofs/certificates that we obtain are unnecessarily complicated. 
 
 
 
