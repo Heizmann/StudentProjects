@@ -1,4 +1,4 @@
-# StudentProjects
+# Ideas for Projects/Theses
 
 * ~~T01: Bitvektor nach Integer Transformation (Variante Nutz Transformation)~~
 * T02: Invariantensynthese
@@ -25,6 +25,7 @@
 * T15: Egraphs for simplification and quantifier elimination
 * T16: Simplification of Floyd-Hoare annotations
 
+-----
 
 ### Topic T02: Constraint-based Invariant Synthesis ★★★★★
 * Motivation: See Section 19 of the [lecture on program verification](https://swt.informatik.uni-freiburg.de/teaching/SS2022/program-verification). Verification would be so easy if we could just synthesize invariants.
@@ -71,9 +72,9 @@ The PolyPacSimplification is an inexpensive simplification of logical formulas. 
 * In this project we will use different algorithms that address the second problem above.
 
 
+-----
 
-
-## Finished StudentProjects (not available any more, but we might find related follow-up topics)
+## Finished Projects (not available any more, but we might find related follow-up topics)
 
 ### Topic T06: Ultimate TreeAutomizer
 * This is a great topic if you love tree automata
