@@ -24,6 +24,7 @@
 * T14: Re-implementation of the control flow graph construction
 * T15: Egraphs for simplification and quantifier elimination
 * T16: Simplification of Floyd-Hoare annotations
+* T17: Bitvector optimizations
 
 -----
 
@@ -70,6 +71,10 @@ The PolyPacSimplification is an inexpensive simplification of logical formulas. 
   * One reason is that the formulas that our algorithm constructs are unnecessarily complicated. We address this problem via a formula simplification (see T13).
   * Another reason is that the sets of states that our algorithm constructs are unnecessarily small. E.g., we might get the invariant `y>=5 ∧ x==7` although the invariant `x>=7` is sufficient.
 * In this project we will use different algorithms that address the second problem above.
+
+### Topic T17: Bitvector optimizations
+A bitvector is a sequence of zeros and ones. We use bitvectors to represent values of variables in computer programs. We use the [SMT theory of bitvectors](https://microsoft.github.io/z3guide/docs/theories/Bitvectors) for our reasoning. In practise, we often have unneccesarily complicated formulas that can be simplified.
+In this project we will implement rewrite rules that simplify formulas over bitvectors. E.g., the *bitwise and* of any variable and the 00000000 bitvector is always zero. E.g., the *bitwise and* with the 00000001 bitvector is equivalent to the *modulo by 2* operation.
 
 
 -----
