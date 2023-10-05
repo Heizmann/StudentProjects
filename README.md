@@ -65,7 +65,10 @@ The PolyPacSimplification is an inexpensive simplification of logical formulas. 
 * Can we compute an egraph for each node (resp the critical contraint of each node), replace subterms by their representative in order to get simpler formulas and in oder to successfully apply DualJunctionSgi more often?
 
 ### Topic 16: Simplification of Floyd-Hoare annotations
-* Motivation: Proofs/certificates that we obtain are unnecessarily complicated. 
+* Motivation: We utilize Floyd-Hoare annotations as a certificate that shows that a program is correct. A Floyd-Hoare annotation is a map that assigns each location a set of states. The definition is given in Section 18 of the [lecture on program verification]. We use logical formulas over program variables to denote sets of states.  Floyd-Hoare annotations that we obtain are unnecessarily complicated.
+  * One reason is that the formulas that our algorithm constructs are unnecessarily complicated. We address this problem via a formula simplification (see T13).
+  * Another reason is that the sets of states that our algorithm constructs are unnecessarily small. E.g., we might get the invariant `y>=5 ∧ x==7` although the invariant `x>=7` is sufficient.
+* In this project we will use different algorithms that address the second problem above.
 
 
 
