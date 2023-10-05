@@ -25,6 +25,7 @@
 * T15: Egraphs for simplification and quantifier elimination
 * T16: Simplification of Floyd-Hoare annotations
 * T17: Bitvector optimizations
+* T18: BTOR2 translation
 
 -----
 
@@ -76,6 +77,8 @@ The PolyPacSimplification is an inexpensive simplification of logical formulas. 
 A bitvector is a sequence of zeros and ones. We use bitvectors to represent values of variables in computer programs. We use the [SMT theory of bitvectors](https://microsoft.github.io/z3guide/docs/theories/Bitvectors) for our reasoning. In practise, we often have unneccesarily complicated formulas that can be simplified.
 In this project we will implement rewrite rules that simplify formulas over bitvectors. E.g., the *bitwise and* of any variable and the 00000000 bitvector is always zero. E.g., the *bitwise and* with the 00000001 bitvector is equivalent to the *modulo by 2* operation.
 
+### Topic T18: BTOR2 translation
+The group of Prof. Armin Biere develops great tools for hardware verification. We do software verification. Idea encode a computer program as an electronic circuit and apply Armin's tools. In this project we want to translate our control-flow graphs into Armin's BTOR2 format.
 
 -----
 
