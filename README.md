@@ -30,7 +30,7 @@
 
 -----
 
-### Topic T02: Constraint-based Invariant Synthesis ★★★★★
+### Topic T02: Constraint-based Invariant Synthesis
 * Motivation: See Section 19 of the [lecture on program verification](https://swt.informatik.uni-freiburg.de/teaching/SS2022/program-verification). Verification would be so easy if we could just synthesize invariants.
 * In fact not only useful for safety invariants but also for ranking functions and danger invariants.
 * We already have an implementation but we want our new ideas require a re-implementation.
@@ -98,13 +98,13 @@ In this project we develop a data-flow based analysis that tries to find out if 
 * This is a great topic if you love tree automata
 * Improve our [Ultimate TreeAutomizer](https://arxiv.org/abs/1907.03998v1) by re-implementing/improving the algorithms of some components.
 
-### Topic T09: Constant Propagation Program Transformation ★★★★★
+### Topic T09: Constant Propagation Program Transformation
 * Motivation: It is very difficult to determine the value of y after the following loop `y:=0 for (int i=0; i<1000; i++) { y = y + x*x; }`. If we however know that the statement `x=2` occurs before the loop, we can replace x by 2 and the loop is simpler.
 * We obtain the information for the constant propagation from our abstract interpretation framework. We do the simplification via our context-aware simplification.
 * Part 2: If we Automizer computes a Floyd-Hoare annotation for the transformed program, this is not a Floyd-Hoare annotation for the original program. If we add all information form the constant propagation we have a Floyd-Hoare annotation but it contains unnecessary many information. Ideally, we add only the information that is needed. We will solve this by iteratively using weakest precondition. Maybe this is just one application of a general simplification for Floyd-Hoare annotations.
 * Extension: Interprocedural programs.
 
-### Topic T10: Add support for Procedures to Ultimate Referee ★★★★★
+### Topic T10: Add support for Procedures to Ultimate Referee
 * Motivation1:  Ultimate Referee works only for program that have one procedure. We want to support several procedures.
 * Motivation2:  Ultimate Referee works only for Boogie programs. We want to support also C programs and use Ultimate Referee as a validator at the prestigious [Competition on Software Verification SV-COMP](https://sv-comp.sosy-lab.org/). 
 * Ultimate Referee was introduced in Section 8 of the [lecture on program verification](https://swt.informatik.uni-freiburg.de/teaching/SS2022/program-verification).
@@ -114,7 +114,7 @@ In this project we develop a data-flow based analysis that tries to find out if 
 * Extension: Define semantics of our CFG formally.
 * Extension: Tell the user where his invariants are insufficient.
 
-### Topic T13: Simplification of logical formulas ★★★★★
+### Topic T13: Simplification of logical formulas
 Motivation: Consider the formula `y>=x*x ∧ y>=1 ∧ x=2`. If we analyze the first conjunct, we can conclude from the third conjunct that x*x can be replaced by 4 afterwards, we can conclude form the second conjunct the the first conjunct can be replaced by `true`.
 * Basic idea is published in a [paper](https://theory.stanford.edu/~aiken/publications/papers/sas10.pdf)
 * Already implemented in Ultimate, but we want to improve the implementation: (1) Heuristic for order of subformulas (2) omit expensive subformulas (3) re-use context computation (4) improve information in context (5) do constant folding (6) strategy for repetitions.
