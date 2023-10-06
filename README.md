@@ -44,6 +44,11 @@
 * Motivation: See https://github.com/ultimate-pa/ultimate/wiki/Finished-Project-Topics#quantifier-elimination-for-div-and-mod
 * Related to linear arithmetic (on modules instead of vector spaced). especially to Smith normal form. https://en.wikipedia.org/wiki/Smith_normal_form
 
+### Topic T04: The UniHorn CHC solver
+
+### Topic T05: Poor-man's tree interpolation (interpolation wrapper)
+Craig interpolants are utilized by many verification tools. Only a few SMT solver support Craig interpolation. We have an implementation of a quantifier elimination. If you can eliminate quantifiers, you can compute Craig interpolants. In this project, we implement a wrapper for an SMT solver that allows the underlying SMT solver also to compute Craig interpolants.
+
 ### Topic T07: Faultlocalization
 Motivation: We do not only detect if there is a bug, we also want to pinpoint statement that could be responsible for the bug.
 [Poster](http://www2.informatik.uni-freiburg.de/~heizmann/2019TACAS-Christakis,Heizmann,Mansur,Schilling,Wustholz-SemanticFaultLocalizationAndSuspiciousnessRanking.pdf)
