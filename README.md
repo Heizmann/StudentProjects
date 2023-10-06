@@ -26,6 +26,7 @@
 * T16: Simplification of Floyd-Hoare annotations
 * T17: Bitvector optimizations
 * T18: BTOR2 translation
+* T19: Overapproximation analysis for traces
 
 -----
 
@@ -79,6 +80,10 @@ In this project we will implement rewrite rules that simplify formulas over bitv
 
 ### Topic T18: BTOR2 translation
 The group of Prof. Armin Biere develops great tools for hardware verification. We do software verification. Idea encode a computer program as an electronic circuit and apply Armin's tools. In this project we want to translate our control-flow graphs into Armin's BTOR2 format.
+
+### Topic T19: Overapproximation analysis for traces
+We often overapproximate complicated program statments. E.g., writing large string literals. If the verification returns a counterexamaple with an overapproximated statement, we return *unknown* instead of *unsafe*. However, in many cases the the counterexample candidate is indeed a real counterexample.
+In this project we develop a data-flow based analysis that tries to find out if overapproximated statements have an effect on feasibility of the error trace.
 
 -----
 
