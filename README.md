@@ -28,7 +28,7 @@
 * T18: BTOR2 translation
 * T19: Overapproximation analysis for traces
 * T20: Webinterface for Hoare calculus
-* T21: Verificaiton of aviation software
+* T21: Verification of aviation software
 
 -----
 
