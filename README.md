@@ -92,7 +92,7 @@ The group of Prof. Armin Biere develops great tools for hardware verification. W
 We often overapproximate complicated program statments. E.g., writing large string literals. If the verification returns a counterexamaple with an overapproximated statement, we return *unknown* instead of *unsafe*. However, in many cases the the counterexample candidate is indeed a real counterexample.
 In this project we develop a data-flow based analysis that tries to find out if overapproximated statements have an effect on feasibility of the error trace.
 
-### Topic T21: Verificaiton of aviation software
+### Topic T21: Verification of aviation software
 Evaluate for some given Ada code whether our software verification is helpful. Translate the Ada code manually to our Boogie intermediate language. Maybe this can be done semi-automatically using [gnat-llvm](https://github.com/AdaCore/gnat-llvm) and our translation from LLVM-IR to Boogie. Think about meaningful specifications and see if we can verify them.
 
 -----
