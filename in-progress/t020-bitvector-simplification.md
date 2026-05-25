@@ -109,3 +109,18 @@ Wichtig: Wir brauchen Tests für jede Regel.
 Klassen mit Tests zur Simplifizierung: SmtUtilsTest , UltimateNormalFormTest, SimplificationTest, PolynomialRelationTest, PolynomialRelationTestModBasedSimplification.
 Vielleicht müssen wir da mal Aufräumen. Aber vermutlich wollen wir analog zu einer der anderen Klassen eine eigene mit Bitvektorsimplifizierungstests und existierende Bitvektorsimplifizierungstests aus existierenden Klassen verschieben.
 
+
+# Idee 2: Simplifizierung von Bitvektorungleichungen.
+
+### Ausgangssituation
+Für Gleichungen von Bitvektoren, Integern und Reals, sowie für Ungleichungen von Integern und Reals haben wir die sehr hilfreiche Klasse PolynomialRelation.
+https://github.com/ultimate-pa/ultimate/blob/f5c6788a5bc52bcf59a9f46511f7a9039935daa6/trunk/source/Library-SmtLibUtils/src/de/uni_freiburg/informatik/ultimate/lib/smtlibutils/polynomials/PolynomialRelation.java#L81
+Leider funktioniert diese Datenstuktur (verwende nur ein Polynom und mache dadurch implizit schon einige Simplifizierungsschritte) nicht für die acht(!) Ungleichungsoperatoren von Bitvektortermen (ult, slt, ule, sle, ugt, sgt, uge, sge).
+
+### Ziel
+Baue ähnliche Datenstruktur mit zwei Polynomen (linke Seite, rechte Seite).
+Wir sollen aber vorher nochmal gut überlegen ob es sich lohnt. Vielleicht sind diese Ungleichungen so fies, dass man zu wenig simplifizieren kann und ein milderes Mittel zur Simplifizierung ausreicht.
+
+# Idee 3: Rückübersetzung von Bitvektortermen (und Integertermen)
+Im Erfolgsfall generiert Ultimate Automizer Invarianten und Funktionskontrakte die die Korrektheit Beweisen. Diese Beweise werden für den mit SMT-Termen beschrifteten CFG generiert. Diese Terme müssen in C-Expression zurückübersetzt werden damit der Benutzer diese verstehen kann. Unsere naive Rückübersetzung ist konzeptuell inkorrekt. Wir brauchen eine Übersetzung die Bitlängen berücksichtigt und bedenkt dass Operatoren in SMT-LIB und C eine leicht andere Semantik haben.
+Mehr dazu via E-Mail.
