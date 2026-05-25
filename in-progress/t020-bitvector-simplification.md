@@ -38,23 +38,60 @@ https://microsoft.github.io/z3guide/docs/logic/intro
 
 ## Verifikation / Ultimate
 
+### Das Framework
+
 Das Ultimate Program Analysis framework besteht aus einigen Tools. 
 https://ultimate-pa.org/
-Eines davon ist der Software Verfier Ultimate Automizer.
+
+Eines davon ist der Software-Verifizierer Ultimate Automizer, der automatisch beweist, ob ein C-Programm eine gegebene Spezifikation erfüllt.
 https://ultimate-pa.org/automizer/
 
-Ultimate Automizer übersetzt ein C Programm zunächst in ein Boogie Programm. 
-Das Boogie Programm wird anschließend in einen Kontrollflussgraphen (CFG) übersetzt dessen Kanten mit SMT-Formeln 
-beschriftet sind so wird z.B. x := x + 1 zur formel x' = x + 1, bzw (= x' (+ x 1)) in SMT-LIB Syntax.
-Während des komplexen Verifikationprozesses werden viele SMT-Formeln erzeugt und manche davon an 
-SMT-Solver gesendet um diese auf Erfüllbarkeit zu überprüfen.
-Typisch dabei ist, dass komplexe Algorithmen aus existierenden Formeln mit Hilfe von Konjunktion (and) 
-Disjunktion (or) oder Substitution (eine Art subterme durch andere Terme zu ersetzen) neue große Terme erzeugen.
-Diese Terme sind oft unnötig groß und es existieren kleine Terme die dazu logisch äquivalent sind.
-Wichtige Algorithmus im Ultimate Framework sind daher auch Algorithmen die Formeln simplifizieren.
-Wir haben verschiedene Simplifizierungalgorithmen. 
-Manche sind sehr schnell, manche sind sehr teuer und verwenden selbst viele SMT-Solver-Aufrufe zu simplifizierung einer einzigen Formel.
-Die Simplifizierung ist so wichtig, dass die schnellen Simplifizierungen nach jedem Bauen einer Formel aufgerufen werden.
+### Vom C-Programm zur SMT-Formel 
 
-# Idee Simplifizierung von Bitvektortermen
+Ultimate Automizer übersetzt ein C-Programm zunächst in ein Boogie-Programm, das anschließend in einen Kontrollflussgraphen (CFG) überführt wird. Die Kanten des CFGs sind mit SMT-Formeln beschriftet – so wird etwa die Zuweisung x := x + 1 zur Formel (= x' (+ x 1)) in SMT-LIB-Syntax.
+
+### Zwei Übersetzungsvarianten
+
+Die Übersetzung von C-Programmen in einen CFG existiert in zwei Varianten, die sich in der Wahl der SMT-Theorie unterscheiden.
+Das Integer-Modell verwendet mathematische Integer. Da C-Integer-Typen jedoch eine feste Wortbreite haben, muss nach Rechenoperationen oft ein Modulo (z.B. 2³²) ergänzt werden, um die C-Semantik korrekt abzubilden. Trotz dieser zusätzlichen Operationen ist die Verifikation mit diesem Modell durchschnittlich schneller. Ein wesentlicher Nachteil ist jedoch, dass bitweise Operationen nicht exakt dargestellt werden können und überapproximiert werden müssen – was dazu führt, dass die Verifikation häufig unknown zurückgibt.
+Das Bitvektormodell bildet die C-Semantik exakt ab, inklusive bitweiser Operationen und Überlaufverhalten. Die Verifikation ist dadurch präziser, aber deutlich teurer – Timeouts sind häufig.
+
+
+### Formelsimplifizierung
+Während des Verifikationsprozesses werden kontinuierlich neue SMT-Formeln erzeugt, indem bestehende Formeln durch Konjunktion, Disjunktion oder Substitution kombiniert werden. Dabei entstehen leicht Terme, die unnötig groß sind, obwohl logisch äquivalente, kleinere Terme existieren. Simplifizierungsalgorithmen spielen daher eine zentrale Rolle im Framework: Schnelle Algorithmen werden nach jeder Formelkonstruktion aufgerufen, während aufwändigere Verfahren – die selbst viele Solver-Aufrufe benötigen – gezielt eingesetzt werden.
+
+# Idee 1: Simplifizierung von Bitvektortermen
+Bei der Simplifizierung von Termen der Integer-Theorie ist Ultimate bereits gut aufgestellt. Für die Bitvektortheorie hingegen gibt es noch erhebliches Verbesserungspotenzial: Viele Rewrite-Regeln, die semantisch äquivalente aber strukturell kleinere Terme erzeugen, sind bisher nicht implementiert. Ziel dieses Projekts ist es, solche Vereinfachungsschritte zu identifizieren, korrekt zu implementieren und in Ultimate zu integrieren.
+
+Ein paar KI-generierte Beispiele für solche Rewrite-Regeln (manche davon sind vielleicht schon implementiert).
+
+* Absorption: (bvand x (bvor x y)) → x
+* Idempotenz: (bvand x x) → x
+* Neutrales Element: (bvor x #b000...0) → x
+* Annihilator: (bvand x #b111...1) → x
+* De Morgan: (bvnot (bvand x y)) → (bvor (bvnot x) (bvnot y))
+* Doppelte Negation: (bvnot (bvnot x)) → x
+* Shift um 0: (bvshl x #b000...0) → x
+* Konstantenfaltung: (bvadd #b0101 #b0011) → #b1000
+
+### Literatur
+* Frank hat das folgende schon für die Übersetzung von C nach Boogie implementiert, da kann man wohl was übernehmen.
+https://link.springer.com/chapter/10.1007/978-3-030-89051-3_16
+Frank hat das für die Übersetzung relevante hier schön zusammengefasst.
+https://link.springer.com/chapter/10.1007/978-3-031-57256-2_31
+
+* Bitvektor Rewrite Regeln von CVC5
+https://link.springer.com/chapter/10.1007/978-3-031-57256-2_31github.com/cvc5/cvc5/blob/main/src/theory/bv/rewrites
+
+* Vielleicht mal reinschauen
+[Syntax-Guided Rewrite Rule Enumeration for SMT Solvers" (SAT 2019)](http://theory.stanford.edu/~barrett/pubs/NRB+19.pdf)
+
+* Abschnitt Rewrite Interessant
+https://link.springer.com/chapter/10.1007/978-3-031-57256-2_31cs.stanford.edu/~niemetz/publications/2023/NiemetzP-CAV23.pdf
+
+* Natürlich gerne weitere suchen
+
+### Sinnvolle Regeln auswählen
+Problem: Zu jeder Formel gibt es unendlich viele größere Formeln die dazu logisch äquivalent sind. Wir können also leicht beliebig viele Simplifizierungsregeln finden. Jede Regel man Ultimate minimal langsamer könnte aber ein großer Gewinn sein.
+  
 
