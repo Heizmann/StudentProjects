@@ -60,7 +60,7 @@ Das Bitvektormodell bildet die C-Semantik exakt ab, inklusive bitweiser Operatio
 ### Formelsimplifizierung
 Während des Verifikationsprozesses werden kontinuierlich neue SMT-Formeln erzeugt, indem bestehende Formeln durch Konjunktion, Disjunktion oder Substitution kombiniert werden. Dabei entstehen leicht Terme, die unnötig groß sind, obwohl logisch äquivalente, kleinere Terme existieren. Simplifizierungsalgorithmen spielen daher eine zentrale Rolle im Framework: Schnelle Algorithmen werden nach jeder Formelkonstruktion aufgerufen, während aufwändigere Verfahren – die selbst viele Solver-Aufrufe benötigen – gezielt eingesetzt werden.
 
-# Idee 1: Simplifizierung von Bitvektortermen
+# Idee 1: Simplifizierung von Bitvektortermen mit Rewrite-Regeln
 Bei der Simplifizierung von Termen der Integer-Theorie ist Ultimate bereits gut aufgestellt. Für die Bitvektortheorie hingegen gibt es noch erhebliches Verbesserungspotenzial: Viele Rewrite-Regeln, die semantisch äquivalente aber strukturell kleinere Terme erzeugen, sind bisher nicht implementiert. Ziel dieses Projekts ist es, solche Vereinfachungsschritte zu identifizieren, korrekt zu implementieren und in Ultimate zu integrieren.
 
 Ein paar KI-generierte Beispiele für solche Rewrite-Regeln (manche davon sind vielleicht schon implementiert).
@@ -92,6 +92,20 @@ https://link.springer.com/chapter/10.1007/978-3-031-57256-2_31cs.stanford.edu/~n
 * Natürlich gerne weitere suchen
 
 ### Sinnvolle Regeln auswählen
-Problem: Zu jeder Formel gibt es unendlich viele größere Formeln die dazu logisch äquivalent sind. Wir können also leicht beliebig viele Simplifizierungsregeln finden. Jede Regel man Ultimate minimal langsamer könnte aber ein großer Gewinn sein.
-  
+Problem: Zu jeder Formel gibt es unendlich viele größere Formeln die dazu logisch äquivalent sind. Wir können also leicht beliebig viele Simplifizierungsregeln finden. Jede Regel man Ultimate minimal langsamer könnte aber ein großer Gewinn sein. Wir wollen irgendwie systematisch vielversprechendes implementieren.
+Ideen:
+* Einfache Regeln kosten wenig performance und sind vielleicht oft anwendbar.
+* Regeln die anderen geholfen haben, helfen uns vielleicht auch.
+* Einfach mal blind Regeln implementieren und auf Benchmarks evaluieren ob sie jemals/manchmal/oft angewendet werden. (Doof weil dann macht man ja unnötige arbeit...)
+* Ein Schritt eines Verifikationsalgorithmus von Ultimate Automizer arbeitet mit ziemlich vielen (bereits simplifizierten) Formeln und prüft diese auf Äquivalenz. Wir könnten äquivalente Formelpaare mit erheblichem Größenunterschied auf die Festplatte schreiben und schauen ob dies Ideen für Simplifizierungsregeln liefern. Diese wären dann ja automatisch praxisrelevant. (Doof ist dass diese Formeln manchmal Seitenlang sind und von Menschen nicht mehr verstanden werden können.)
+* ...
+
+### Wo in Ultimate würde man das implementieren?
+Startpunkt für die Rewrite-basierte Simplifizierung ist die `unfterm` Methode in `SmtUtils`. Viele Methoden in `SmtUtils` implementieren solche Rewrite-Regeln.
+https://github.com/ultimate-pa/ultimate/blob/f5c6788a5bc52bcf59a9f46511f7a9039935daa6/trunk/source/Library-SmtLibUtils/src/de/uni_freiburg/informatik/ultimate/lib/smtlibutils/SmtUtils.java#L1470
+
+### Wo in Ultimate implementiert man Tests?
+Wichtig: Wir brauchen Tests für jede Regel.
+Klassen mit Tests zur Simplifizierung: SmtUtilsTest , UltimateNormalFormTest, SimplificationTest, PolynomialRelationTest, PolynomialRelationTestModBasedSimplification.
+Vielleicht müssen wir da mal Aufräumen. Aber vermutlich wollen wir analog zu einer der anderen Klassen eine eigene mit Bitvektorsimplifizierungstests und existierende Bitvektorsimplifizierungstests aus existierenden Klassen verschieben.
 
