@@ -9,8 +9,6 @@ also ob es eine Belegung der Variablen gibt, die die Formel wahr macht.
 Im Vergleich zu klassischen SAT-Solvern, die nur Boolesche Logik verstehen, 
 können SMT-Solver zusätzlich mit reichhaltigeren Datentypen umgehen: 
 ganze Zahlen, reelle Zahlen, Arrays und einige mehr.
-Onlinetutorial zu SMT-Solvern
-https://microsoft.github.io/z3guide/docs/logic/intro
 
 ### Was ist SMT-LIB?
 Damit verschiedene SMT-Solver miteinander verglichen und ausgetauscht werden können, 
