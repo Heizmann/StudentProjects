@@ -79,14 +79,12 @@ Frank hat das für die Übersetzung relevante hier schön zusammengefasst.
 https://link.springer.com/chapter/10.1007/978-3-031-57256-2_31
 
 * Bitvektor Rewrite Regeln von CVC5
-https://link.springer.com/chapter/10.1007/978-3-031-57256-2_31
 https://github.com/cvc5/cvc5/blob/main/src/theory/bv/rewrites
 
 * Vielleicht mal reinschauen
 [Syntax-Guided Rewrite Rule Enumeration for SMT Solvers" (SAT 2019)](http://theory.stanford.edu/~barrett/pubs/NRB+19.pdf)
 
 * Abschnitt Rewrite Interessant
-https://link.springer.com/chapter/10.1007/978-3-031-57256-2_31
 https://cs.stanford.edu/~niemetz/publications/2023/NiemetzP-CAV23.pdf
 
 * Natürlich gerne weitere suchen
